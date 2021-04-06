@@ -18,13 +18,15 @@
     {% endblock %}
 
     {{ form_start(form, {'attr': {'class': 'ch-cookie-consent__form'}}) }}
-        <div class="ch-cookie-consent__category-group">
-            {% for child in form %}
-                {% if child.vars.block_prefixes[0] != 'button' %}
-                    {{ form_row(child) }}
-                {% endif %}
-            {% endfor %}
-        </div>
+        {% if not simplified %}
+            <div class="ch-cookie-consent__category-group">
+                {% for child in form %}
+                    {% if child.vars.block_prefixes[0] != 'button' %}
+                        {{ form_row(child) }}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
 
         <div class="ch-cookie-consent__btn-group">
             {{ form_rest(form) }}
