@@ -31,6 +31,11 @@ class CookieConsentType extends AbstractType
     protected $cookieCategories;
 
     /**
+     * @var array
+     */
+    protected $cookieCategoriesFlatten;
+
+    /**
      * @var bool
      */
     protected $cookieConsentSimplified;
@@ -39,6 +44,7 @@ class CookieConsentType extends AbstractType
     {
         $this->cookieChecker           = $cookieChecker;
         $this->cookieCategories        = $cookieCategories;
+        $this->cookieCategoriesFlatten = $this->flattenCookieCategories($cookieCategories);
         $this->cookieConsentSimplified = $cookieConsentSimplified;
     }
 
@@ -47,7 +53,7 @@ class CookieConsentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        foreach ($this->cookieCategories as $category) {
+        foreach ($this->cookieCategoriesFlatten as $category) {
             $builder->add($category, ChoiceType::class, [
                 'expanded' => true,
                 'multiple' => false,
@@ -68,7 +74,7 @@ class CookieConsentType extends AbstractType
             $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
                 $data = $event->getData();
 
-                foreach ($this->cookieCategories as $category) {
+                foreach ($this->cookieCategoriesFlatten as $category) {
                     $data[$category] = isset($data['use_all_cookies']) ? 'true' : 'false';
                 }
 
@@ -85,5 +91,21 @@ class CookieConsentType extends AbstractType
         $resolver->setDefaults([
             'translation_domain' => 'CHCookieConsentBundle',
         ]);
+    }
+
+    /**
+     * Remove nested arrays.
+     */
+    private function flattenCookieCategories($cookieCategories, $cookieCategoriesFlatten = [])
+    {
+        foreach ($cookieCategories as $category) {
+            if (is_array($category)) {
+                $cookieCategoriesFlatten = $this->flattenCookieCategories($category, $cookieCategoriesFlatten);
+            } else {
+                $cookieCategoriesFlatten[] = $category;
+            }
+        }
+
+        return $cookieCategoriesFlatten;
     }
 }
