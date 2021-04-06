@@ -33,6 +33,11 @@ class CookieConsentType extends AbstractType
     /**
      * @var array
      */
+    protected $cookieCategoriesRequired;
+
+    /**
+     * @var array
+     */
     protected $cookieCategoriesFlatten;
 
     /**
@@ -40,12 +45,13 @@ class CookieConsentType extends AbstractType
      */
     protected $cookieConsentSimplified;
 
-    public function __construct(CookieChecker $cookieChecker, array $cookieCategories, bool $cookieConsentSimplified = false)
+    public function __construct(CookieChecker $cookieChecker, array $cookieCategories, array $cookieCategoriesRequired, bool $cookieConsentSimplified = false)
     {
-        $this->cookieChecker           = $cookieChecker;
-        $this->cookieCategories        = $cookieCategories;
-        $this->cookieConsentSimplified = $cookieConsentSimplified;
-        $this->cookieCategoriesFlatten = $this->flattenCookieCategories($cookieCategories);
+        $this->cookieChecker            = $cookieChecker;
+        $this->cookieCategories         = $cookieCategories;
+        $this->cookieCategoriesRequired = $cookieCategoriesRequired;
+        $this->cookieConsentSimplified  = $cookieConsentSimplified;
+        $this->cookieCategoriesFlatten  = $this->flattenCookieCategories($cookieCategories);
     }
 
     /**
@@ -57,11 +63,12 @@ class CookieConsentType extends AbstractType
             $builder->add($category, ChoiceType::class, [
                 'expanded' => true,
                 'multiple' => false,
-                'data'     => $this->cookieChecker->isCategoryAllowedByUser($category) ? 'true' : 'false',
+                'data'     => in_array($category, $this->cookieCategoriesRequired) ? 'true' : ($this->cookieChecker->isCategoryAllowedByUser($category) ? 'true' : 'false'),
                 'choices'  => [
                     ['ch_cookie_consent.yes' => 'true'],
                     ['ch_cookie_consent.no' => 'false'],
                 ],
+                'disabled' => in_array($category, $this->cookieCategoriesRequired)
             ]);
         }
 
@@ -78,6 +85,10 @@ class CookieConsentType extends AbstractType
 
             if (isset($data['use_all_cookies'])) {
                 foreach ($this->cookieCategoriesFlatten as $category) {
+                    $data[$category] = 'true';
+                }
+            } else {
+                foreach ($this->cookieCategoriesRequired as $category) {
                     $data[$category] = 'true';
                 }
             }

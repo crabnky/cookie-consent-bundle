@@ -23,6 +23,7 @@ class CHCookieConsentExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter('ch_cookie_consent.categories', $config['categories']);
+        $container->setParameter('ch_cookie_consent.required_categories', $config['required_categories']);
         $container->setParameter('ch_cookie_consent.theme', $config['theme']);
         $container->setParameter('ch_cookie_consent.use_logger', $config['use_logger']);
         $container->setParameter('ch_cookie_consent.position', $config['position']);

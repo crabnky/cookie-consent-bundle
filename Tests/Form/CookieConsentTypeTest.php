@@ -49,7 +49,7 @@ class CookieConsentTypeTest extends TypeTestCase
 
     protected function getExtensions(): array
     {
-        $type = new CookieConsentType($this->cookieChecker, ['analytics', 'tracking', 'marketing'], false);
+        $type = new CookieConsentType($this->cookieChecker, ['functional', 'analytics', 'tracking', 'marketing'], ['functional'], false);
 
         return [
             new PreloadedExtension([$type], []),

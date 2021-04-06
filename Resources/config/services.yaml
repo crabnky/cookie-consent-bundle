@@ -8,6 +8,7 @@ services:
         bind:
             $cookieConsentTheme: '%ch_cookie_consent.theme%'
             $cookieCategories: '%ch_cookie_consent.categories%'
+            $cookieCategoriesRequired: '%ch_cookie_consent.required_categories%'
             $useLogger: '%ch_cookie_consent.use_logger%'
             $cookieConsentPosition: '%ch_cookie_consent.position%'
             $cookieConsentSimplified: '%ch_cookie_consent.simplified%'

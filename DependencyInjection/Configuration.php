@@ -31,7 +31,10 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->variableNode('categories')
-                    ->defaultValue([CategoryEnum::CATEGORY_TRACKING, CategoryEnum::CATEGORY_MARKETING, CategoryEnum::CATEGORY_SOCIAL_MEDIA])
+                    ->defaultValue([CategoryEnum::CATEGORY_FUNCTIONAL, CategoryEnum::CATEGORY_TRACKING, CategoryEnum::CATEGORY_MARKETING, CategoryEnum::CATEGORY_SOCIAL_MEDIA])
+                ->end()
+                ->variableNode('required_categories')
+                    ->defaultValue([CategoryEnum::CATEGORY_FUNCTIONAL])
                 ->end()
                 ->enumNode('theme')
                     ->defaultValue(ThemeEnum::THEME_LIGHT)
