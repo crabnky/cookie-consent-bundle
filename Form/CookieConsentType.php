@@ -76,8 +76,10 @@ class CookieConsentType extends AbstractType
         $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
             $data = $event->getData();
 
-            foreach ($this->cookieCategoriesFlatten as $category) {
-                $data[$category] = isset($data['use_all_cookies']) ? 'true' : 'false';
+            if (isset($data['use_all_cookies'])) {
+                foreach ($this->cookieCategoriesFlatten as $category) {
+                    $data[$category] = 'true';
+                }
             }
 
             $event->setData($data);
