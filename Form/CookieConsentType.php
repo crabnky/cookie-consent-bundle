@@ -73,8 +73,8 @@ class CookieConsentType extends AbstractType
         }
 
         if ($this->cookieConsentSimplified === false) {
-            $builder->add('save', SubmitType::class, ['label' => 'ch_cookie_consent.save', 'attr' => ['class' => 'btn ch-cookie-consent__btn']]);
             $builder->add('customize', SubmitType::class, ['label' => 'ch_cookie_consent.customize', 'attr' => ['class' => 'btn ch-cookie-consent__btn']]);
+            $builder->add('save', SubmitType::class, ['label' => 'ch_cookie_consent.save', 'attr' => ['class' => 'btn ch-cookie-consent__btn']]);
         }
 
         $builder->add('use_only_functional_cookies', SubmitType::class, ['label' => 'ch_cookie_consent.use_only_functional_cookies', 'attr' => ['class' => 'btn ch-cookie-consent__btn']]);
