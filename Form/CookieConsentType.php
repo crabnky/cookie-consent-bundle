@@ -103,7 +103,7 @@ class CookieConsentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'translation_domain' => 'CHCookieConsentBundle',
+            'translation_domain' => 'cookie-consent',
         ]);
     }
 

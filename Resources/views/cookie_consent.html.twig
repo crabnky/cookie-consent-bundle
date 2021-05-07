@@ -7,15 +7,15 @@
 {% block body %}
     <div class="ch-cookie-consent ch-cookie-consent--{{ theme }}-theme ch-cookie-consent--{{ position }} {% if simplified %}ch-cookie-consent--simplified{% endif %}">
         {% block title %}
-            <h3 class="ch-cookie-consent__title">{{ 'ch_cookie_consent.title'|trans({}, 'CHCookieConsentBundle') }}</h3>
+            <h3 class="ch-cookie-consent__title">{{ 'ch_cookie_consent.title'|trans({}, 'cookie-consent') }}</h3>
         {% endblock %}
 
         {% block intro %}
-            <p class="ch-cookie-consent__intro">{{ 'ch_cookie_consent.intro'|trans({}, 'CHCookieConsentBundle') }}</p>
+            <p class="ch-cookie-consent__intro">{{ 'ch_cookie_consent.intro'|trans({}, 'cookie-consent') }}</p>
         {% endblock %}
 
         {% block read_more %}
-            <a class="ch-cookie-consent__read-more" href="{% block read_more_link %}/privacy-statement{% endblock %}">{{ 'ch_cookie_consent.read_more'|trans({}, 'CHCookieConsentBundle') }}</a>
+            <a class="ch-cookie-consent__read-more" href="{% block read_more_link %}/privacy-statement{% endblock %}">{{ 'ch_cookie_consent.read_more'|trans({}, 'cookie-consent') }}</a>
         {% endblock %}
 
         {{ form_start(form, {'attr': {'class': 'ch-cookie-consent__form'}}) }}
@@ -36,8 +36,8 @@
                 {% if simplified %}
                     {% block toggle_details %}
                         <div class="ch-cookie-consent__toggle-details">
-                            <span class="ch-cookie-consent__toggle-details-show">{{ 'ch_cookie_consent.show_details'|trans({}, 'CHCookieConsentBundle') }}</span>
-                            <span class="ch-cookie-consent__toggle-details-hide">{{ 'ch_cookie_consent.hide_details'|trans({}, 'CHCookieConsentBundle') }}</span>
+                            <span class="ch-cookie-consent__toggle-details-show">{{ 'ch_cookie_consent.show_details'|trans({}, 'cookie-consent') }}</span>
+                            <span class="ch-cookie-consent__toggle-details-hide">{{ 'ch_cookie_consent.hide_details'|trans({}, 'cookie-consent') }}</span>
                         </div>
                     {% endblock %}
                 {% endif %}
