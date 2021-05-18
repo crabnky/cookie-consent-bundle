@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="ch_cookieconsent_log")
+ * @ORM\Table(name="tbl_cookieconsent_log")
  */
 class CookieConsentLog
 {
